@@ -62,7 +62,9 @@ namespace SmartPick.Core.Helpers
         private static int[] AssignTo(this IList<int> source, IReadOnlyDictionary<int, int> legSelections)
         {
             var size = legSelections.Count;
-            var weightedLegs = legSelections.ToDictionary(l => l.Key, l => new WeightedLeg { Weight = l.Value + (size - l.Key) * 2, SelectionCount = 1 });
+            //the weigh will help to put more selections in the early legs while take the number of available selections in to account
+            var weightedLegs = legSelections.ToDictionary(l => l.Key,
+                l => new WeightedLeg {Weight = l.Value + (size - l.Key) * 2, SelectionCount = 1});
 
             //O(p^l) time complexity
             foreach (var p in source)

@@ -60,7 +60,7 @@ namespace SmartPick.Core
             const int trials = 1000; //this is equivalent to set the longest waiting time
             var legInd = 0;
             while (result.Probability < targetProbs && legInd < trials)
-            {
+            {//replacing the worst selection with better one for each leg
                 var legOrder = legInd % Pool.Legs.Length + 1;
                 var minProb = result[legOrder].Min(b => b.Probability);
                 var availableSelection = Pool.Legs[legOrder - 1].Selections
